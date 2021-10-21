@@ -54,7 +54,19 @@ $ bash remote.sh
 
 - [**Hacking Expect**](https://github.com/hackerexpect)
 
-  https://github.com/AnonyVox/remote/blob/main/tool1.png
+ ##
+
+<h3 align="center">
+
+:: Workflow ::
+
+</h3>
+
+<p align="center">
+
+<img src="https://github.com/AnonyVox/remote/blob/main/tool1.png"/>
+
+</p>
 
 
 
