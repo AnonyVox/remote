@@ -7,6 +7,28 @@
 
 <b>This Tool is made for educational purposes only</b>. Do not attempt to violate the law with anything contained here. <b>If this is your intention, then Get the hell out of here</b>!
 
+### Special Thanks :
+
+- [**Rapid7**](https://github.com/rapid7)
+
+- [**Hackersploit**](https://github.com/AlexisAhmed)
+
+- [**Hacking Expect**](https://github.com/hackerexpect)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
