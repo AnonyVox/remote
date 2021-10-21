@@ -25,7 +25,7 @@ $ git clone git://github.com/AnonyVox/remote.git
 
 $ cd remote
 
-$ bash remote.sh
+$ bash setup.sh
 
 ```
   
@@ -69,9 +69,6 @@ $ bash remote.sh
 
 
 </p>
-
-
-
 
 
 
