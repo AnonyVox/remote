@@ -65,6 +65,8 @@ $ bash remote.sh
 <p align="center">
 
 <img src="https://github.com/AnonyVox/remote/blob/main/tool1.png"/>
+<img src="https://github.com/AnonyVox/remote/blob/main/tool2.png"/>
+
 
 </p>
 
