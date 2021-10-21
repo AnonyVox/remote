@@ -7,6 +7,22 @@
 
 <b>This Tool is made for educational purposes only</b>. Do not attempt to violate the law with anything contained here. <b>If this is your intention, then Get the hell out of here</b>!
 
+### Dependencies
+
+**`remote`** requires following programs to run properly - 
+
+- `metasploit-framework`
+
+- `apktool`
+
+- `zipalign`
+
+- `java`
+
+> All the dependencies will be installed automatically when you run `setup.sh` for the first time.  
+  
+  
+  
 ### Special Thanks :
 
 - [**Rapid7**](https://github.com/rapid7)
