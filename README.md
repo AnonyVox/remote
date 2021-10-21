@@ -7,6 +7,29 @@
 
 <b>This Tool is made for educational purposes only</b>. Do not attempt to violate the law with anything contained here. <b>If this is your intention, then Get the hell out of here</b>!
 
+  
+
+### Installation
+
+- Just, Clone this repository -
+
+```
+
+$ git clone git://github.com/AnonyVox/remote.git
+
+```
+
+- Change to cloned directory and run `setup.sh` -
+
+```
+
+$ cd remote
+
+$ bash remote.sh
+
+```
+  
+  
 ### Dependencies
 
 **`remote`** requires following programs to run properly - 
